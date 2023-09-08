@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Magical Mystery Theater</title>
+</head>
+<body>
+    <h1>Magical Mystery Theater</h1>
+    <button type="button" onclick="buyTicket()">Purchase Ticket</button>
+    <script>
+        // GOAL: Figure out the cost of a ticket to the Magical Mystery Theater and show it to the user
+        // When a user clicks the purchase button, prompt for the user's age, then use that age to determine ticket cost
+        // If the user is over 12 and under 65, cost is $20. If the user is 12 and under, or 65 and over, cost is $10
+        // Use an alert to display cost to the user
+        const GENERAL_ADMISSION_TICKET_COST = 20;
+        const CHILD_AND_SENIOR_TICKET_COST = 10;
+        const MATINEE_DISCOUNT = 3;
+
+        function buyTicket() {
+            const age = prompt('What is your age?');
+            let cost = getBaseTicketCost(age);
+
+            const isMatinee = prompt('Are you attending a matinee show?').toLowerCase();
+            if ((isMatinee === 'yes') || (isMatinee === 'y')) {
+                cost = cost - MATINEE_DISCOUNT;
+            }
+            alert('Your ticket will cost: $' + cost);
+        }
+
+        function getBaseTicketCost(age) {
+            if ((age <= 12) || (age >=65)) {
+                return CHILD_AND_SENIOR_TICKET_COST;
+            }
+            return GENERAL_ADMISSION_TICKET_COST;
+        }
+    </script>
+</body>
+</html>
