@@ -47,7 +47,7 @@
                 </p>
                 <p class="objective">Your objective is to guess the correct color from the list.</p>
                 <p>
-                    If you don't guess correctly, you will receive a hint whether your guess is alphabetically higher or lower to the color I am thinking of. 'A' being alphabetically highest; 'Z' being alphabetically lowest. Once you correctly guess the color I am thinking of, you will be able to see how many guesses it took you to get it! Happy gaming!
+                    If you don't guess correctly, you will receive a hint whether your guess is alphabetically higher or lower to the color I am thinking of. 'A' being alphabetically lowest; 'Z' being alphabetically highest. <strong><em>You will only have 5 chances to guess correctly!</em></strong> Once you correctly guess the color I am thinking of, you will be able to see how many guesses it took you to get it! Happy gaming!
                 </p>
                 <button type="button" class="btn btn-outline-secondary col-2 mx-auto" onclick="runGame()">Start Game</button>
             </div>
@@ -61,11 +61,13 @@
                 let guess = '';
                 let correct = false;
                 let numTries = 0;
+                let numAttempts = 5;
                 const targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length);
                 const target = COLORS_ARRAY[targetIndex];
 
                 do {
-                    guess = prompt(`I am thinking of one of those colors \n\n${COLORS_ARRAY.join(", ")}\n\nWhat color am I thinking of?\n`);
+                    guess = prompt(`I am thinking of one of those colors \n\n${COLORS_ARRAY.join(", ")}\n\nWhat color am I thinking of?\n\n\nNumber of attempts: ${numAttempts}`).toLowerCase();
+
                     
                     if (guess === null) {
                         alert("Exiting game.");
@@ -73,10 +75,17 @@
                     }
                     correct = checkGuess(guess, target);
                     numTries += 1;
-                } while(!correct); // breaks out of the loop 
+                    numAttempts -=1;
+                } while(numAttempts > 0 && !correct); // breaks out of the loop 
  
-                document.body.style.background = guess;
-                alert(`Congratulations! You've correctly guessed the color: ${target}!\n\nNumber of guesses: ${numTries}\n\nHit OK to see the color in the background.`);
+                document.body.style.background = target;
+
+                if (guess != target && numAttempts === 0) {
+                    alert(`Oh no! The correct color was ${target}\n\nHit OK to see the color in the background.`)
+                }
+                else {
+                    alert(`Congratulations! You've correctly guessed the color: ${target}!\n\nNumber of guesses: ${numTries}\n\nHit OK to see the color in the background.`);
+                }
             }
 
             function checkGuess(guess, target) {
@@ -85,10 +94,10 @@
                 if (COLORS_ARRAY.includes(guess)){
                     
                     if (guess > target) {
-                        alert(`Sorry, ${guess} is incorrect.\n\n Hint: My color is alphabetically higher than ${guess}.\n\nPlease try again!`);
+                        alert(`Sorry, ${guess} is incorrect.\n\n Hint: My color is alphabetically lower than ${guess}.\n\nPlease try again!`);
                     }
                     else if (guess < target) {
-                        alert(`Sorry, ${guess} is incorrect.\n\n Hint: My color is alphabetically lower than ${guess}.\n\nPlease try again!`);
+                        alert(`Sorry, ${guess} is incorrect.\n\n Hint: My color is alphabetically higher than ${guess}.\n\nPlease try again!`);
                     }
                     else {
                         correct = true;
