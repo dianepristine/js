@@ -13,6 +13,10 @@ function runGame() {
 
     do {
         guessString = prompt('I am thinking of a number in the range 1 to 100.\n\nWhat is the number?');
+        if (guessString === null) {
+            return;
+        } // way of exiting the entire function
+        // break will exit out of the loop but return the alert at the end
         guessNumber = +guessString;
         numTries += 1;
         correct = checkGuess(guessNumber, target);

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Week 2 Workshop</title>
+    </head>
+    <body>
+        <script>
+            let isCorrect = false;
+            let numberToGuess = Math.floor(Math.random()* 25) + 1;
+            let numberOfLoops = 0;
+
+            do {
+                // code happens here
+                let userGuess = prompt("Guess the number I'm thinking of!");
+                if(userGuess == numberToGuess) {
+                    let isCorrect = true;
+                    alert(`You guessed correctly! You guessed in this many tries: ${numberOfLoops}`);
+                }
+                numberOfLoops++;
+            } while (!isCorrect);
+
+            function printFibonacci(n) {
+                let a = 0;
+                let b = 1;
+                let count = 0;
+                while (count < n) {
+                    console.log(a);
+                    let temp = a + b;
+                    a = b;
+                    b = temp;
+                    count++;
+                }
+            }
+
+            let fingers = Math.floor(Math.random() * 10) + 1;
+                let guess = 0;
+                while (guess !== fingers) { // for this to run, the condition has to be true
+                    guess = +prompt("How many fingers am I holding up?"); // shorthand way of converting datatype from string to number
+                    if (isNaN(guess)) {
+                        break; // breaks out of loop entirely
+                    }
+                    if ((guess < 0) || (guess > 10)) {
+                        continue;
+                    }
+                    if (guess === fingers) {
+                        alert("You got it!");
+                    } else {
+                        alert("Try again!");
+                    }
+                }
+
+            let fruitArray = ["mangos", "apples", "cherries", "avocado"]
+            fruitArray.join(); // can use ("separator")
+            fruitArray.join().sort() // can use multiple methods in one
+        </script>
+    </body>
+</html>
